@@ -1,0 +1,41 @@
+
+# C-a :source .screenrc
+
+term screen-256color
+termcapinfo xterm* ti@:te@
+startup_message off
+vbell off
+autodetach on
+altscreen on
+shelltitle "$ |bash"
+defscrollback 10000
+defutf8 on
+nonblock on
+
+#escape ``
+#escape `e
+
+# BIND ESCAPE TO F11!
+# bindkey -k F1 command
+
+hardstatus alwayslastline                                                                                                                          
+#hardstatus alwaysfirstline                                                                                                                          
+#hardstatus string '%{= mK}%-Lw%{= KW}%50>%n%f* %t%{= mK}%+Lw%< %{= kG}%-=%D %d %M %Y %c:%s%{-}'
+#hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+#hardstatus string '%{= kw}[ %{= kb}%H%{= kw} ][ %= %{= kw}%?%-Lw%?%{= kr}(%{= kW}%n*%f %t%?(%u)%?%{= kr})%{= kw}%?%+Lw%?%?%= %{w} ][ %{r}%l%{w} ]%{w}[%{r} %d/%m/%y %C %A %{w}]%{w}'
+hardstatus string '%{= kw}[ %{= kb}%H%{= kw} ][%= %{= kw}%?%-Lw%?%{= kW}%n*%f %t%?%?%{= kw}%?%+Lw%?%?%= ][ %{r}%l%{w} ]%{w}[%{r} %d/%m/%y %C %A %{w}]%{w}'
+
+#bind 'R' screen ssh s1554463@sunfire16
+#bind 'R' screen -t sunfire16 ssh s1554463@sunfire16
+bind 'q' quit
+
+screen -t shell 0
+
+#chdir /hr
+#screen -t acer 0
+#screen -t kw64 1 ssh root@132.234.103.72 -t 'screen -d -RR kw64'
+#screen -t spl2 2 ssh root@132.234.103.113 -t 'screen -d -RR spl2'
+#screen -t sunfire 3 ssh s1554463@132.234.222.1 -t 'screen -d -RR spl'
+
+
+
