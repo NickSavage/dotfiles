@@ -30,9 +30,9 @@ WHITE="\e[1;37m"
 NOCOLOR="\[\033[00m\]"
 
 if [[ $EUID -ne 0 ]]; then
-    export PS1="$GREEN\h $CYAN\W \$ $NOCOLOR"
+    export PS1="\\[$GREEN\h $CYAN\W \$ $NOCOLOR"
 else
-    export PS1="$RED\h $CYAN\W \$ $NOCOLOR"
+    export PS1="\\[$RED\h $CYAN\W \$ $NOCOLOR"
 fi
 
 export GREP_COLOR="1;33"
@@ -46,6 +46,7 @@ export EDITOR="emacsclient -nw -c"
 alias ..="cd ../"
 alias ....="cd ../../"
 alias ......="cd ../../../"
+alias ed="emacs --daemon"
 alias ec="emacsclient -nw"
 alias emacs="emacs -nw"
 alias ls="ls $LS_OPTIONS"
