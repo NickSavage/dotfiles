@@ -108,9 +108,13 @@
 
 ; agenda views
 (setq org-agenda-custom-commands
-      (quote ((" " "Notes" tags "CURRENT"
-	       ((org-agenda-overriding-header "Daily Tasks To Complete")
-		                (org-tags-match-list-sublevels t))))))
+      (quote (("a" "Notes"
+	       ((agenda "" ((org-agenda-ndays 1)))
+		(todo "IN-PROGRESS")
+		(todo "NEXT")
+		(todo "WAITING")
+		(todo "TODO"))))
+	       ))
 
 ;------------------------------------
 ;;;; Global Functions
