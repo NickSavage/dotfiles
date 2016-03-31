@@ -78,9 +78,6 @@
 (setq org-mobile-directory "~/agenda/mobile")
 (setq org-mobile-inbox-for-pull (concat org-mobile-directory "/index.org"))
 
-
-;(setq org-hide-leading-stars t)
-
 (setq org-agenda-files (quote ("~/agenda/agenda.org"	    
 			       "~/agenda/refile.org"
 			       "~/agenda/school.org")))
@@ -113,54 +110,6 @@
       (quote (("N" "Notes" tags "CURRENT"
 	       ((org-agenda-overriding-header "Daily Tasks To Complete")
 		                (org-tags-match-list-sublevels t))))))
-
-;------------------------------------
-;;;; Gnus
-;------------------------------------
-
-(setq gnus-agent nil) ; not that sure what this actually does
-
-; Default email, name
-(setq user-mail-address "nicholas.b.savage@gmail.com"
-      user-full-name "Nicholas Savage")
-
-; Switches email depending on who I am replying to.
-(setq gnus-posting-styles
-      '(((header "to" "nagaten@gmail.com")
-	 (address "nagaten@gmail.com"))
-	((header "to" "nicholas.b.savage@gmail.com")
-	 (address "nicholas.b.savage@gmail.com"))
-	((header "to" "nsava041@uottawa.ca")
-	 (address "nsava041@uottawa.ca"))
-	((header "cc" "nagaten@gmail.com")
-	 (address "nagaten@gmail.com"))
-	((header "cc" "nicholas.b.savage@gmail.com")
-	 (address "nicholas.b.savage@gmail.com"))
-	((header "cc" "nsava041@uottawa.ca")
-	 (address "nsava041@uottawa.ca"))))
-
-
-;------------------------------------
-;;;; bbdb
-;------------------------------------
-
-(add-to-list 'load-path "~/.emacs.d/bbdb")
-(add-to-list 'load-path "~/.emacs.d/bbdb/lisp")
-
-(setq bbdb-file "~/.emacs.d/.bbdb")
-(require 'bbdb-loaddefs "~/.emacs.d/bbdb/lisp/bbdb-loaddefs.el")
-
-(bbdb-initialize 'gnus 'message)
-
-(setq bbdb-default-country "Canada")
-(setq bbdb-default-area-code 613)
-
-; gmail import
-(setq gmail2bbdb-bbdb-file "~/.emacs.d/.bbdb")
-(add-to-list 'load-path "~/.emacs.d/lisp/")
-(autoload 'gmail2bbdb-import-file "gmail2bbdb" nil t nil)
-
-
 
 ;------------------------------------
 ;;;; Global Functions
