@@ -92,14 +92,15 @@
 	       "* %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n"))))
 
 (setq org-todo-keywords
-      '((sequence "TODO" "NEXT" "|" "DONE")
-	(sequence "WAITING" "TODO" "NEXT" "|" "DONE")
-	(sequence "SOMEDAY" "NEXT" "|" "DONE")
-	(sequence "HOLD" "NEXT" "|" "DONE")))
+      '((sequence "TODO" "NEXT" "IN-PROGRESS" "|" "DONE")
+	(sequence "WAITING" "TODO" "NEXT" "IN-PROGRESS" "|" "DONE")
+	(sequence "SOMEDAY" "NEXT" "IN-PROGRESS" "|" "DONE")
+	(sequence "HOLD" "NEXT" "IN-PROGRESS" "|" "DONE")))
 
 (setq org-todo-keyword-faces
       (quote (("TODO" . org-warning)
 	      ("NEXT" :foreground "blue" :weight bold)
+	      ("IN-PROGRESS" :foreground "red" :weight bold)
 	      ("DONE" :foreground "forest green" :weight bold)
 	      ("HOLD" :foreground "magenta" :weight bold)
 	      ("WAITING" :foreground "yellow" :weight bold)
@@ -107,7 +108,7 @@
 
 ; agenda views
 (setq org-agenda-custom-commands
-      (quote (("N" "Notes" tags "CURRENT"
+      (quote ((" " "Notes" tags "CURRENT"
 	       ((org-agenda-overriding-header "Daily Tasks To Complete")
 		                (org-tags-match-list-sublevels t))))))
 
