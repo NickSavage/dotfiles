@@ -43,6 +43,8 @@ export TERM="rxvt-unicode-256color"
 export BROWSER="firefox"
 export EDITOR="emacsclient -nw -c"
 
+export LEDGER_FILE="~/hledger/ledger"
+
 alias ..="cd ../"
 alias ....="cd ../../"
 alias ......="cd ../../../"

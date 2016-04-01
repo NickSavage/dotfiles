@@ -114,7 +114,20 @@
 		(todo "NEXT")
 		(todo "WAITING")
 		(todo "TODO"))))
-	       ))
+	     ))
+
+(add-to-list 'load-path "~/.emacs.d/org-caldav")
+(require 'org-caldav)
+
+(setq org-caldav-calendars
+      '((:calendar-id "school" :files ("~/agenda/school.org")
+		      :inbox "~/agenda/fromschool.org")
+	(:calendar-id "work" :files ("~/agenda/work.org")
+		      :inbox "~/agenda/fromwork.org")
+	(:calendar-id "personal" :files ("~/agenda/agenda.org")
+		      :inbox "~/agenda/frompersonal.org")
+		       ))
+
 
 ;------------------------------------
 ;;;; Global Functions
