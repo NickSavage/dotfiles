@@ -36,6 +36,11 @@
 
 (setq tetris-score-file "~/.emacs.d/tetris-scores")
 
+(autoload 'hledger-mode "hledger-mode" "A major mode for hledger" t)
+(add-to-list 'load-path
+	     (expand-file-name "~/.emacs.d/hledger-mode/"))
+(add-to-list 'auto-mode-alist '("\\.ledger$" . hledger-mode))
+
 ;------------------------------------
 ;;;; Org-Mode
 ;------------------------------------
