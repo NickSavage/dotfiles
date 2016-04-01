@@ -123,6 +123,8 @@
 
 (add-to-list 'load-path "~/.emacs.d/org-caldav")
 (require 'org-caldav)
+(setq org-caldav-url "https://nicksavage.ca/remote.php/caldav/calendars/nick")
+
 
 (setq org-caldav-calendars
       '((:calendar-id "school" :files ("~/agenda/school.org")
