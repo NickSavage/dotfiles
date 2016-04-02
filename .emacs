@@ -77,7 +77,7 @@
 (setq diary-file "~/agenda/diary")
 (setq org-agenda-include-diary t)
 (setq org-return-follows-link t)
-
+(setq org-tags-exclude-from-inheritance '(":project:"))
 
 ; Org-Mobile Settings
 (setq org-mobile-directory "~/agenda/mobile")
@@ -85,6 +85,7 @@
 
 (setq org-agenda-files (quote ("~/agenda/agenda.org"	    
 			       "~/agenda/refile.org"
+			       "~/agenda/work.org"
 			       "~/agenda/school.org")))
 (setq org-default-notes-file "~/agenda/refile.org")
 (setq org-refile-targets (quote ((nil :maxlevel . 9)(org-agenda-files :maxlevel . 9)
@@ -112,19 +113,22 @@
 	      ("SOMEDAY" :foreground "orange" :weight bold))))
 
 ; agenda views
+
 (setq org-agenda-custom-commands
       (quote (("a" "Notes"
 	       ((agenda "" ((org-agenda-ndays 1)))
 		(todo "IN-PROGRESS")
 		(todo "NEXT")
 		(todo "WAITING")
-		(todo "TODO"))))
+		(todo "TODO")))
+	      ("p" "Projects" tags "+project+LEVEL=2")
+	      )
 	     ))
 
 (add-to-list 'load-path "~/.emacs.d/org-caldav")
 (require 'org-caldav)
-(setq org-caldav-url "https://nicksavage.ca/remote.php/caldav/calendars/nick")
 
+(setq org-caldav-url "https://nicksavage.ca/owncloud/remote.php/caldav/calendars/nick")
 
 (setq org-caldav-calendars
       '((:calendar-id "school" :files ("~/agenda/school.org")
@@ -246,6 +250,11 @@ buffer read-only, so I suggest setting kill-read-only-ok to t."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-stuck-projects
+   (quote
+    ("+project+LEVEL=2/-DONE"
+     ("TODO" "NEXT" "IN-PROGRESS")
+     nil "")))
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")
  '(smtpmail-smtp-service 587))
