@@ -22,6 +22,9 @@
 (ido-mode t)
 (global-visual-line-mode t)
 
+(server-start)
+(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
+
 (setq default-major-mode 'fundamental-mode) ;;; I like it.
 (set-register ?e '(file . "~/.emacs")) ;; C-x r j e opens ~/.emacs
 (setq inhibit-startup-message t)
