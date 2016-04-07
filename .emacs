@@ -12,10 +12,15 @@
 (if (file-exists-p "~/.emacs.d/lua-mode.el")
     (require `lua-mode))
 
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(package-initialize)
+
 ; who needs these?
 (menu-bar-mode -1)
 (tool-bar-mode -1)
  
+(evil-mode t)
 (line-number-mode t)
 (column-number-mode t)
 (show-paren-mode t)
@@ -73,7 +78,6 @@
 	(holiday-fixed 12 25 "Christmas Day")
 	(holiday-fixed 12 26 "Boxing Day")
 	(holiday-fixed 12 31 "New Year's Eve")))
-
 
 ; Org-Mode Settings
 (setq org-directory "~/agenda")
