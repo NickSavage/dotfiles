@@ -16,18 +16,22 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
+(server-start)
+
 ; who needs these?
 (menu-bar-mode -1)
 (tool-bar-mode -1)
  
+(setq evil-want-C-i-jump nil)
+(require 'evil)
 (evil-mode t)
+
 (line-number-mode t)
 (column-number-mode t)
 (show-paren-mode t)
 (ido-mode t)
 (global-visual-line-mode t)
 
-(server-start)
 (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
 
 (setq default-major-mode 'fundamental-mode) ;;; I like it.
