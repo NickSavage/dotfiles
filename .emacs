@@ -103,10 +103,14 @@
 				 )))
 
 (setq org-capture-templates
-      (quote (("t" "todo" entry (file "~/agenda/refile.org")
-	       "* TODO %?\n%U\n%a\n")
-	      ("b" "bookmark" entry (file "~/agenda/refile.org")
-	       "* %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n"))))
+      (quote (	("t" "todo" entry (file "~/agenda/refile.org")
+		 "* TODO %?\n%U\n%a\n")
+		("n" "next" entry (file "~/agenda/refile.org")
+		 "* NEXT %?\n%U\n%a\n")
+		("s" "someday" entry (file "~/agenda/refile.org")
+		 "* SOMEDAY %?\n%U\n%a\n")
+		("b" "bookmark" entry (file "~/agenda/refile.org")
+		 "* %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n"))))
 
 (setq org-todo-keywords
       '((sequence "TODO" "NEXT" "IN-PROGRESS" "|" "DONE")
