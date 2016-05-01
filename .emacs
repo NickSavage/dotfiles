@@ -57,6 +57,7 @@
 ;;;; Org-Mode
 ;------------------------------------
 
+(evil-set-initial-state 'calendar-mode 'emacs)
 (setq mark-holidays-in-calendar t)
 (setq holiday-bahai-holidays nil)
 (setq holiday-hebrew-holidays nil)
