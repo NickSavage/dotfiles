@@ -38,8 +38,8 @@ fi
 export GREP_COLOR="1;33"
 export LS_OPTIONS="$LS_OPTIONS -hF"
 export GREP_OPTIONS="$GREP_OPTIONS"
-export TERMINAL="urxvt"
-export TERM="rxvt-unicode-256color"
+export TERMINAL="xterm"
+export TERM="xterm"
 export BROWSER="firefox"
 export EDITOR="emacsclient -nw -c"
 
