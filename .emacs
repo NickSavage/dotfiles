@@ -16,8 +16,6 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
-(server-start)
-
 ; who needs these?
 (menu-bar-mode -1)
 (tool-bar-mode -1)
