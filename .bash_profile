@@ -35,15 +35,6 @@ else
     export PS1="\\[$RED\h $CYAN\W \$ $NOCOLOR"
 fi
 
-export GREP_COLOR="1;33"
-export LS_OPTIONS="$LS_OPTIONS -hF"
-export GREP_OPTIONS="$GREP_OPTIONS"
-export BROWSER="firefox"
-export EDITOR="emacs"
-export LEDGER_FILE="~/hledger/ledger"
-export TODOTXT_FINAL_FILTER='$HOME/.todo/filters/futureTasks'
-export TODOTXT_DEFAULT_ACTION=ls
-
 alias ..="cd ../"
 alias ....="cd ../../"
 alias ......="cd ../../../"
@@ -53,3 +44,12 @@ alias emacs="emacs -nw"
 alias ls="ls $LS_OPTIONS"
 alias grep="grep --color=auto"
 alias t="todo.sh"
+
+export GREP_COLOR="1;33"
+export LS_OPTIONS="$LS_OPTIONS -hF"
+export GREP_OPTIONS="$GREP_OPTIONS"
+export BROWSER="firefox"
+export EDITOR="emacs -nw"
+export LEDGER_FILE="~/hledger/ledger"
+export TODOTXT_FINAL_FILTER='$HOME/.todo/filters/futureTasks'
+export TODOTXT_DEFAULT_ACTION=ls
