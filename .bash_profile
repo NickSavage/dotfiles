@@ -39,7 +39,7 @@ export GREP_COLOR="1;33"
 export LS_OPTIONS="$LS_OPTIONS -hF"
 export GREP_OPTIONS="$GREP_OPTIONS"
 export BROWSER="firefox"
-
+export EDITOR="emacs"
 export LEDGER_FILE="~/hledger/ledger"
 export TODOTXT_FINAL_FILTER='$HOME/.todo/filters/futureTasks'
 export TODOTXT_DEFAULT_ACTION=ls
