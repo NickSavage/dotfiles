@@ -2,7 +2,7 @@
 # Last updated:
 # February 16, 2016
 
-PATH=/usr/local/scripts/:/bin:/usr/bin:/sbin:/usr/bin/perlbin/site:~/scripts/:/usr/bin/perlbin/vendor:/usr/bin/perlbin/core:/usr/sbin:/usr/local/bin
+PATH=/usr/local/scripts/:/bin:/usr/bin:/sbin:/usr/bin/perlbin/site:~/scripts/:/usr/bin/perlbin/vendor:/usr/bin/perlbin/core:/usr/sbin:/usr/local/bin:/opt/android-sdk-linux/platform-tools
 
 if [ "$TERM" != "dumb" ]; then
     export LS_OPTIONS='--color=auto'
@@ -53,3 +53,4 @@ export EDITOR="emacs -nw"
 export LEDGER_FILE="~/hledger/ledger"
 export TODOTXT_FINAL_FILTER='$HOME/.todo/filters/futureTasks'
 export TODOTXT_DEFAULT_ACTION=ls
+export TERM=linux
