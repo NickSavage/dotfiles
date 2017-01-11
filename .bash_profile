@@ -2,7 +2,7 @@
 # Last updated:
 # February 16, 2016
 
-PATH=/usr/local/scripts/:/bin:/usr/bin:/sbin:/usr/bin/perlbin/site:~/scripts/:/usr/bin/perlbin/vendor:/usr/bin/perlbin/core:/usr/sbin:/usr/local/bin:/opt/android-sdk-linux/platform-tools:/usr/games/
+PATH=/usr/local/scripts/:/bin:/usr/bin:/sbin:~/scripts/:/usr/sbin:/usr/local/bin:/opt/android-sdk-linux/platform-tools:/usr/games/
 
 if [ "$TERM" != "dumb" ]; then
     export LS_OPTIONS='--color=auto'
@@ -43,7 +43,7 @@ alias ec="emacsclient -nw"
 alias emacs="emacs -nw"
 alias ls="ls $LS_OPTIONS"
 alias grep="grep --color=auto"
-alias t="topydo"
+alias t="todo.sh"
 
 export GREP_COLOR="1;33"
 export LS_OPTIONS="$LS_OPTIONS -hF"
