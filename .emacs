@@ -7,14 +7,11 @@
 ;;;; Init
 ;------------------------------------
 
-(if (file-exists-p "~/.emacs.d/post.el")
-    (require 'post))
-(if (file-exists-p "~/.emacs.d/lua-mode.el")
-    (require `lua-mode))
-
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
+
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 
 ; who needs these?
 (menu-bar-mode -1)
