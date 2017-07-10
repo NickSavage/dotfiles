@@ -6,7 +6,6 @@ PATH=/usr/local/scripts/:/bin:/usr/bin:/sbin:~/scripts/:/usr/sbin:/usr/local/bin
 
 if [ "$TERM" != "dumb" ]; then
     export LS_OPTIONS='--color=auto'
-    export GREP_OPTIONS='--color=auto'
     eval `dircolors ~/.dir_colors`
 fi
 
