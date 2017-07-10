@@ -6,7 +6,6 @@ PATH=/usr/local/scripts/:/bin:/usr/bin:/sbin:~/scripts/:/usr/sbin:/usr/local/bin
 
 if [ "$TERM" != "dumb" ]; then
     export LS_OPTIONS='--color=auto'
-    export GREP_OPTIONS='--color=auto'
     eval `dircolors ~/.dir_colors`
 fi
 
@@ -42,12 +41,9 @@ alias ed="emacs --daemon"
 alias ec="emacsclient -nw"
 alias emacs="emacs -nw"
 alias ls="ls $LS_OPTIONS"
-alias grep="grep --color=auto"
 alias t="todo.sh"
 
-export GREP_COLOR="1;33"
 export LS_OPTIONS="$LS_OPTIONS -hF"
-export GREP_OPTIONS="$GREP_OPTIONS"
 export BROWSER="firefox"
 export EDITOR="emacs -nw"
 export LEDGER_FILE="~/hledger/ledger"
