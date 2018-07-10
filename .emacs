@@ -1,7 +1,7 @@
 ;------------------------------------
 ;; Nick Savage's .emacs file
 ;; Last Updated:
-;; 2016-02-16
+;; 2018-07-10
 
 ;------------------------------------
 ;;;; Init
@@ -24,7 +24,7 @@
 (line-number-mode t)
 (column-number-mode t)
 (show-paren-mode t)
-(ido-mode t)
+;(ido-mode t)
 (global-visual-line-mode t)
 
 (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
@@ -42,7 +42,6 @@
 (setq c-basic-offset 8)
 
 (setq tetris-score-file "~/.emacs.d/tetris-scores")
-
 
 (evil-set-initial-state 'calendar-mode 'emacs)
 (setq mark-holidays-in-calendar t)
@@ -77,6 +76,8 @@
 (setq org-agenda-include-diary t)
 (setq org-return-follows-link t)
 (setq org-tags-exclude-from-inheritance '(":project:"))
+(setq org-todo-keywords
+      '((sequence "TODO" "REVIEWED" "NEXT" "|" "REVIEW" "WAITING" "DONE")))
 
 (setq org-agenda-files '("~/agenda/agenda.org"))
 (setq org-default-notes-file "~/agenda/refile.org")
@@ -144,3 +145,5 @@ buffer read-only, so I suggest setting kill-read-only-ok to t."
 (global-set-key (kbd "C-c /") 'org-sparse-tree)
 (global-set-key (kbd "C-RET") 'org-insert-heading)
 (global-set-key (kbd "C-c c") 'org-capture)
+
+(global-set-key (kbd "C-c r") 'helm-org-rifle)
