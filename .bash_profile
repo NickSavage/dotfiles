@@ -50,3 +50,4 @@ export LEDGER_FILE="~/hledger/ledger"
 export TODOTXT_FINAL_FILTER='$HOME/.todo/filters/futureTasks'
 export TODOTXT_DEFAULT_ACTION=ls
 export TERM=linux
+export LEDGER_FILE=~/hledger/ledger

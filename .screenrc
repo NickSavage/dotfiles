@@ -1,7 +1,7 @@
 
 # C-a :source .screenrc
 
-term xterm-256color
+term screen-256color
 termcapinfo xterm* ti@:te@
 startup_message off
 vbell off
