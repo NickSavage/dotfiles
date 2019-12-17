@@ -50,6 +50,16 @@
 
 (setq tetris-score-file "~/.emacs.d/tetris-scores")
 
+(setq org-caldav-url "https://nextcloud.nicksavage.ca/remote.php/dav/calendars/nick")
+(setq org-caldav-inbox "~/agenda/inbox.org")
+(setq org-caldav-files '("~/agenda/personal.org" "~/agenda/inbox.org" "~/agenda/work.org"))
+(setq org-caldav-calendars
+      '((:calendar-id "test" :files ("~/agenda/work.org")
+		      :inbox "~/agenda/fromwork.org")
+	(:calendar-id "personal" :files ("~/agenda/personal.org")
+		      :inbox "~/agenda/frompersonal.org")) )
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
 (evil-set-initial-state 'calendar-mode 'emacs)
 (setq mark-holidays-in-calendar t)
 (setq holiday-bahai-holidays nil)
@@ -198,10 +208,10 @@ buffer read-only, so I suggest setting kill-read-only-ok to t."
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
    (quote
-    ("~/agenda/work.org" "~/inbox/inbox.org" "~/agenda/diary.org" "~/agenda/personal.org")))
+    ("~/agenda/work.org" "~/agenda/diary.org" "~/agenda/personal.org")))
  '(package-selected-packages
    (quote
-    (nov php-mode ess magit lua-mode hledger-mode helm-org-rifle evil-ledger 2048-game))))
+    (org-caldav nov php-mode ess magit lua-mode hledger-mode helm-org-rifle evil-ledger 2048-game))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
