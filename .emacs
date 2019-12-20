@@ -21,6 +21,11 @@
 (require 'evil)
 (evil-mode t)
 
+(require 'deft)
+(setq deft-recursive t)
+(global-set-key [f8] 'deft)
+
+
 (require 'hledger-mode)
 (add-to-list 'auto-mode-alist '("\\.journal\\'" . hledger-mode))
 (setq hledger-jfile "~/hledger/ledger")
@@ -87,6 +92,11 @@
 	(holiday-fixed 12 26 "Boxing Day")
 	(holiday-fixed 12 31 "New Year's Eve")))
 
+; Anki Editor
+(setq anki-editor-anki-connect-listening-address "192.168.0.163")
+(global-set-key (kbd "C-c x") 'anki-editor-insert-note)
+(global-set-key (kbd "C-c X") 'anki-editor-push-notes)
+
 ; Org-Mode Settings
 (setq org-directory "~/agenda")
 ;(setq diary-file "~/agenda/diary")
@@ -114,7 +124,7 @@
 	      ("WAITING" :foreground "forest green" :weight bold)
 	      ("SOMEDAY" :foreground "orange" :weight bold))))
 
-(setq org-agenda-files '( "~/agenda/work.org" "~/inbox/inbox.org" "~/agenda/diary.org" "~/agenda/personal.org"))
+(setq org-agenda-files '( "~/agenda/work.org" "~/inbox/inbox.org" "~/agenda/diary.org" "~/agenda/personal.org" "~/agenda/fromwork.org" "~/agenda/frompersonal.org"))
 (setq org-default-notes-file "~/agenda/refile.org")
 
 (evil-set-initial-state 'calendar-mode 'emacs)
@@ -154,32 +164,18 @@
     (interactive)
     (insert (format-time-string "%Y-%m-%d")))
 
-; brettatoms
-(defun copy-line (&optional arg)
-  "Do a kill-line but copy rather than kill.  This function directly calls
-kill-line, so see documentation of kill-line for how to use it including prefix
-argument and relevant variables.  This function works by temporarily making the
-buffer read-only, so I suggest setting kill-read-only-ok to t."
-  (interactive "P")
-  (toggle-read-only 1)
-  (kill-line arg)
-  (toggle-read-only 0))
-
 ;---------------------------------
 ;;;; Key Bindings
 ;---------------------------------
 
-(global-set-key (kbd "<f5>") 'undo)
 (global-set-key (kbd "C-c g") 'goto-line)
 (global-set-key (kbd "C-c d") 'insert-date)
-(global-set-key (kbd "C-c C-k") 'copy-line)
 
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "C-x C-k") 'kill-region)
 (global-set-key (kbd "C-q") 'query-replace-regexp)
 (global-set-key (kbd "C-c C-w") 'toggle-word-wrap)
 (global-set-key (kbd "M-c") 'calendar)
-
 
 (global-set-key (kbd "C-l") 'capitalize-word)
 (global-set-key (kbd "C-x /") 'point-to-register)
@@ -211,7 +207,7 @@ buffer read-only, so I suggest setting kill-read-only-ok to t."
     ("~/agenda/work.org" "~/agenda/diary.org" "~/agenda/personal.org")))
  '(package-selected-packages
    (quote
-    (org-caldav nov php-mode ess magit lua-mode hledger-mode helm-org-rifle evil-ledger 2048-game))))
+    (deft anki-editor org-caldav nov php-mode ess magit lua-mode hledger-mode helm-org-rifle evil-ledger 2048-game))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
