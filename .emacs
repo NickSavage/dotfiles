@@ -11,8 +11,6 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
-(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-
 ; who needs these?
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -23,20 +21,10 @@
 
 (require 'deft)
 (setq deft-recursive t)
-(global-set-key [f8] 'deft)
-
-
-(require 'hledger-mode)
-(add-to-list 'auto-mode-alist '("\\.journal\\'" . hledger-mode))
-(setq hledger-jfile "~/hledger/ledger")
-
-(global-set-key (kbd "C-c e") 'hledger-jentry)
-(global-set-key (kbd "C-c j") 'hledger-run-command)
 
 (line-number-mode t)
 (column-number-mode t)
 (show-paren-mode t)
-;(ido-mode t)
 (global-visual-line-mode t)
 
 (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
@@ -92,11 +80,6 @@
 	(holiday-fixed 12 26 "Boxing Day")
 	(holiday-fixed 12 31 "New Year's Eve")))
 
-; Anki Editor
-(setq anki-editor-anki-connect-listening-address "192.168.0.163")
-(global-set-key (kbd "C-c x") 'anki-editor-insert-note)
-(global-set-key (kbd "C-c X") 'anki-editor-push-notes)
-
 ; Org-Mode Settings
 (setq org-directory "~/agenda")
 ;(setq diary-file "~/agenda/diary")
@@ -124,7 +107,7 @@
 	      ("WAITING" :foreground "forest green" :weight bold)
 	      ("SOMEDAY" :foreground "orange" :weight bold))))
 
-(setq org-agenda-files '( "~/agenda/work.org" "~/inbox/inbox.org" "~/agenda/diary.org" "~/agenda/personal.org" "~/agenda/fromwork.org" "~/agenda/frompersonal.org"))
+(setq org-agenda-files '( "~/agenda/work.org" "~/agenda/inbox.org" "~/agenda/diary.org" "~/agenda/personal.org" "~/agenda/fromwork.org" "~/agenda/frompersonal.org"))
 (setq org-default-notes-file "~/agenda/refile.org")
 
 (evil-set-initial-state 'calendar-mode 'emacs)
@@ -133,11 +116,12 @@
 (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
 (setq org-refile-use-outline-path t)      
 
-
 (setq org-capture-templates
-      '(("t" "Task" entry (file+headline "~/agenda/personal.org" "Tasks")
+      '(("t" "Task" entry (file+headline "~/agenda/inbox.org" "Tasks")
 	 "* NEXT %?\n  %i\n  %a")
-	("e" "Event" entry (file+headline "~/agenda/personal.org" "Events")
+	("l" "Link" entry (file+headline "~/agenda/inbox.org" "Links")
+	 "* %?\n %i\n %a")
+	("e" "Event" entry (file+headline "~/agenda/inbox.org" "Events")
 	 "* %?\n %i\n %a")
 	))
 
@@ -151,14 +135,7 @@
   (interactive)
   (shell-command-on-region (point-min) (point-max) "wc -w"))
 
-(defun reload ()
-  "Reload .emacs interactively"
-  (interactive)
-  (if (file-exists-p "~/.emacs")
-    (load "~/.emacs")))
-
-; Based heavily on EmacsWiki code.
-(defun insert-date ()
+(defun nsavage-insert-date ()
     "Insert the current date. With prefix-argument, use ISO format. With
    two prefix arguments, write out the day and month name."
     (interactive)
@@ -168,34 +145,18 @@
 ;;;; Key Bindings
 ;---------------------------------
 
-(global-set-key (kbd "C-c g") 'goto-line)
-(global-set-key (kbd "C-c d") 'insert-date)
-
-(global-set-key (kbd "C-w") 'backward-kill-word)
-(global-set-key (kbd "C-x C-k") 'kill-region)
-(global-set-key (kbd "C-q") 'query-replace-regexp)
-(global-set-key (kbd "C-c C-w") 'toggle-word-wrap)
-(global-set-key (kbd "M-c") 'calendar)
-
-(global-set-key (kbd "C-l") 'capitalize-word)
-(global-set-key (kbd "C-x /") 'point-to-register)
-(global-set-key (kbd "C-x j") 'register-to-point)
-(global-set-key (kbd "C-o") 'repeat)
-
-(global-set-key (kbd "C-t") 'transpose-words)
-(global-set-key (kbd "M-SPC") 'set-mark-command)
+(global-set-key (kbd "C-c d") 'nsavage-insert-date)
 (global-set-key (kbd "C-x g") 'magit-status)
-
-; org-mode keybindings
+(global-set-key [f8] 'deft)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c /") 'org-sparse-tree)
 (global-set-key (kbd "C-RET") 'org-insert-heading)
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c l") 'org-store-link)
-
 (global-set-key (kbd "C-c r") 'helm-org-rifle)
 (global-set-key (kbd "C-c p") 'org-do-demote)
 (global-set-key (kbd "C-c P") 'org-do-promote)
+(global-set-key (kbd "C-w") 'backward-kill-word)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
