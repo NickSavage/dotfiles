@@ -25,7 +25,6 @@
 (line-number-mode t)
 (column-number-mode t)
 (show-paren-mode t)
-(global-visual-line-mode t)
 
 (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
 
@@ -125,6 +124,16 @@
 	 "* %?\n %i\n %a")
 	))
 
+(setq org-books-file "~/agenda/my-list.org")
+
+(setq org-agenda-custom-commands
+'(("h" "Agenda and Home-related tasks"
+   ((agenda "")
+    (tags-todo "+HOME")))
+  ("y" agenda*)
+  ("w" todo "WAITING")
+  ("s" todo "SOMEDAY")
+  ("f" occur-tree "\\<FIXME\\>")))
 
 ;------------------------------------
 ;;;; Global Functions
@@ -145,7 +154,6 @@
 ;;;; Key Bindings
 ;---------------------------------
 
-(global-set-key (kbd "C-c d") 'nsavage-insert-date)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key [f8] 'deft)
 (global-set-key (kbd "C-c a") 'org-agenda)
@@ -166,9 +174,11 @@
  '(org-agenda-files
    (quote
     ("~/agenda/work.org" "~/agenda/diary.org" "~/agenda/personal.org")))
+ '(org-agenda-window-frame-fractions (quote (0.5 . 1)))
+ '(org-agenda-window-setup (quote current-window))
  '(package-selected-packages
    (quote
-    (deft anki-editor org-caldav nov php-mode ess magit lua-mode hledger-mode helm-org-rifle evil-ledger 2048-game))))
+    (deft anki-editor org-books org-caldav nov php-mode ess magit lua-mode hledger-mode helm-org-rifle evil-ledger 2048-game))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
