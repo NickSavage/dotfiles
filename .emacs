@@ -132,17 +132,20 @@
 (setq org-agenda-custom-commands
 '(("h" "Agenda and Home-related tasks"
    ((agenda "")
-    (tags-todo "+HOME")))
+    (tags "+HOME+TODO=\"TODO\"")))
   ("y" agenda*)
-  ("w" todo "WAITING")
+  ("w" "Agenda and Work-related tasks"
+   ((agenda "")
+    (tags "+WORK+TODO=\"TODO\"")))
+  ("W" todo "WAITING")
   ("s" todo "SOMEDAY")
   ("f" occur-tree "\\<FIXME\\>")))
 
-(require 'org-habit)
 (add-hook 'org-agenda-mode-hook
 	  (lambda ()
 	    (visual-line-mode -1)
 	    (toggle-truncate-lines 1)))
+(setq org-modules '(org-habit))
 
 ;------------------------------------
 ;;;; Global Functions
