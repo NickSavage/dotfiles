@@ -23,6 +23,7 @@
 (setq deft-recursive t)
 
 (line-number-mode t)
+(global-visual-line-mode t)
 (column-number-mode t)
 (show-paren-mode t)
 
@@ -106,7 +107,7 @@
 	      ("WAITING" :foreground "forest green" :weight bold)
 	      ("SOMEDAY" :foreground "orange" :weight bold))))
 
-(setq org-agenda-files '( "~/agenda/work.org" "~/agenda/inbox.org" "~/agenda/diary.org" "~/agenda/personal.org" "~/agenda/fromwork.org" "~/agenda/frompersonal.org"))
+(setq org-agenda-files '( "~/agenda/" "~/agenda/projects/"))
 (setq org-default-notes-file "~/agenda/refile.org")
 
 (evil-set-initial-state 'calendar-mode 'emacs)
@@ -117,7 +118,9 @@
 
 (setq org-capture-templates
       '(("t" "Task" entry (file+headline "~/agenda/inbox.org" "Tasks")
-	 "* NEXT %?\n  %i\n  %a")
+	 "* TODO %?\n  %i\n  %a")
+	("s" "Someday" entry (file+headline "~/agenda/inbox.org" "Tasks")
+	 "* SOMEDAY %?\n  %i\n  %a")
 	("l" "Link" entry (file+headline "~/agenda/inbox.org" "Links")
 	 "* %?\n %i\n %a")
 	("e" "Event" entry (file+headline "~/agenda/inbox.org" "Events")
@@ -134,6 +137,12 @@
   ("w" todo "WAITING")
   ("s" todo "SOMEDAY")
   ("f" occur-tree "\\<FIXME\\>")))
+
+(require 'org-habit)
+(add-hook 'org-agenda-mode-hook
+	  (lambda ()
+	    (visual-line-mode -1)
+	    (toggle-truncate-lines 1)))
 
 ;------------------------------------
 ;;;; Global Functions
@@ -175,7 +184,6 @@
    (quote
     ("~/agenda/work.org" "~/agenda/diary.org" "~/agenda/personal.org")))
  '(org-agenda-window-frame-fractions (quote (0.5 . 1)))
- '(org-agenda-window-setup (quote current-window))
  '(package-selected-packages
    (quote
     (deft anki-editor org-books org-caldav nov php-mode ess magit lua-mode hledger-mode helm-org-rifle evil-ledger 2048-game))))
