@@ -130,16 +130,12 @@
 (setq org-books-file "~/agenda/my-list.org")
 
 (setq org-agenda-custom-commands
-'(("h" "Agenda and Home-related tasks"
-   ((agenda "")
-    (tags "+HOME+TODO=\"TODO\"")))
-  ("y" agenda*)
-  ("w" "Agenda and Work-related tasks"
-   ((agenda "")
-    (tags "+WORK+TODO=\"TODO\"")))
-  ("W" todo "WAITING")
-  ("s" todo "SOMEDAY")
-  ("f" occur-tree "\\<FIXME\\>")))
+      '(("y" agenda*)
+	("w" tags "+WORK+TODO=\"TODO\"")
+	("h" tags "+HOME+TODO=\"TODO\"")
+	("W" todo "WAITING")
+	("s" todo "SOMEDAY")
+	("f" occur-tree "\\<FIXME\\>")))
 
 (add-hook 'org-agenda-mode-hook
 	  (lambda ()
@@ -183,9 +179,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files
-   (quote
-    ("~/agenda/work.org" "~/agenda/diary.org" "~/agenda/personal.org")))
  '(org-agenda-window-frame-fractions (quote (0.5 . 1)))
  '(package-selected-packages
    (quote
