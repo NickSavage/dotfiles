@@ -1,188 +1,114 @@
-;------------------------------------
-;; Nick Savage's .emacs file
-;; Last Updated:
-;; 2018-07-10
-
-;------------------------------------
-;;;; Init
-;------------------------------------
-
-(require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(package-initialize)
 
-; who needs these?
-(menu-bar-mode -1)
-(tool-bar-mode -1)
- 
-(setq evil-want-C-i-jump nil)
-(require 'evil)
-(evil-mode t)
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
-(require 'deft)
-(setq deft-recursive t)
-
-(line-number-mode t)
-(global-visual-line-mode t)
-(column-number-mode t)
-(show-paren-mode t)
-
-(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
-
-(setq default-major-mode 'fundamental-mode) ;;; I like it.
-(set-register ?e '(file . "~/.emacs")) ;; C-x r j e opens ~/.emacs
-(setq inhibit-startup-message t)
-(setq-default kill-read-only-ok t)
-
-; Making emacs less fucking annoying.
+(add-hook 'before-save-hook #'gofmt-before-save)
+(setq catppuccin-flavor 'latte)
 (setq backup-directory-alist '(("." . "~/.saves")))
-(setq auto-save-default nil)
-(fset 'yes-or-no-p 'y-or-n-p)  ;; lol
-(setq default-tab-width 8) ;;; Set tab width to 4. Default 2.
-(setq c-basic-offset 8)
-
-(setq tetris-score-file "~/.emacs.d/tetris-scores")
-
-(setq org-caldav-url "https://nextcloud.nicksavage.ca/remote.php/dav/calendars/nick")
-(setq org-caldav-inbox "~/agenda/inbox.org")
-(setq org-caldav-files '("~/agenda/personal.org" "~/agenda/inbox.org" "~/agenda/work.org"))
-(setq org-caldav-calendars
-      '((:calendar-id "test" :files ("~/agenda/work.org")
-		      :inbox "~/agenda/fromwork.org")
-	(:calendar-id "personal" :files ("~/agenda/personal.org")
-		      :inbox "~/agenda/frompersonal.org")) )
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-
-(evil-set-initial-state 'calendar-mode 'emacs)
-(setq mark-holidays-in-calendar t)
-(setq holiday-bahai-holidays nil)
-(setq holiday-hebrew-holidays nil)
-(setq holiday-islamic-holidays nil)
-;; Canadian holidays
-(setq general-holidays
-      '((holiday-fixed 1 1 "New Year's Day")
-	(holiday-fixed 2 14 "Valentine's Day")
-	(holiday-fixed 2 15 "Flag Day")
-	(holiday-fixed 3 1 "St. David's Day")
-	(holiday-fixed 3 17 "St. Patrick's Day")
-	(holiday-fixed 4 1 "April Fools' Day")
-	(holiday-float 5 1 3 "Victoria Day")
-	(holiday-float 5 0 2 "Mother's Day")
-	(holiday-float 6 0 3 "Father's Day")
-	(holiday-fixed 7 1 "Canada Day")
-	(holiday-float 8 1 1 "Civic Holiday (Colonel By Day)") 
-	(holiday-float 9 1 1 "Labour Day")
-	(holiday-float 10 1 2 "Thanksgiving")
-	(holiday-fixed 10 31 "Halloween")
-	(holiday-fixed 11 11 "Remebrance Day")
-	(holiday-fixed 12 24 "Christmas Eve")
-	(holiday-fixed 12 25 "Christmas Day")
-	(holiday-fixed 12 26 "Boxing Day")
-	(holiday-fixed 12 31 "New Year's Eve")))
-
-; Org-Mode Settings
-(setq org-directory "~/agenda")
-;(setq diary-file "~/agenda/diary")
-(setq org-agenda-include-diary t)
-(setq org-return-follows-link t)
-(setq org-tags-exclude-from-inheritance '(":project:"))
-;(setq org-todo-keywords
-;      '((sequence "TODO" "REVIEWED" "NEXT" "|" "REVIEW" "WAITING" "DONE")))
+(electric-pair-mode t)
 
 
-(setq org-todo-keywords
-      '((sequence "REVIEWED" "NEXT" "|" "DONE" "REVIEW" "WAITING")
-	(sequence "SOMEDAY" "NEXT" "DONE")
-	(sequence "NEXT" "REVIEW" "NEXT" "PDR" "TAX" "TYPING" "DONE")
-	(sequence "TODO" "DONE")))
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-C-i-jump nil)
+  (evil-mode t))
 
-(setq org-todo-keyword-faces
-      (quote (("TODO" . org-warning)
-	      ("NEXT" :foreground "blue" :weight bold)
-	      ("REVIEW" :foreground "forest green" :weight bold)
-	      ("DONE" :foreground "forest green" :weight bold)
-	      ("TYPING" :foreground "forest green" :weight bold)
-	      ("PDR" :foreground "forest green" :weight bold)
-	      ("TAX" :foreground "forest green" :weight bold)
-	      ("WAITING" :foreground "forest green" :weight bold)
-	      ("SOMEDAY" :foreground "orange" :weight bold))))
+(use-package magit
+  :ensure t
+  :defer)
 
-(setq org-agenda-files '( "~/agenda/" "~/agenda/projects/"))
-(setq org-default-notes-file "~/agenda/refile.org")
+(use-package ivy
+  :ensure t
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) "))
 
-(evil-set-initial-state 'calendar-mode 'emacs)
-(setq org-refile-targets '((nil :maxlevel . 6)
-			   (org-agenda-files :maxlevel . 6)))
-(setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
-(setq org-refile-use-outline-path t)      
+(use-package vterm
+  :ensure t
+  :config
+  (add-to-list 'evil-emacs-state-modes 'vterm-mode))
 
-(setq org-capture-templates
-      '(("t" "Task" entry (file+headline "~/agenda/inbox.org" "Tasks")
-	 "* TODO %?\n  %i\n  %a")
-	("s" "Someday" entry (file+headline "~/agenda/inbox.org" "Tasks")
-	 "* SOMEDAY %?\n  %i\n  %a")
-	("l" "Link" entry (file+headline "~/agenda/inbox.org" "Links")
-	 "* %?\n %i\n %a")
-	("e" "Event" entry (file+headline "~/agenda/inbox.org" "Events")
-	 "* %?\n %i\n %a")
-	))
+(use-package company
+  :config
+  (global-company-mode))
 
-(setq org-books-file "~/agenda/my-list.org")
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
-(setq org-agenda-custom-commands
-      '(("y" agenda*)
-	("w" tags "+WORK+TODO=\"TODO\"")
-	("h" tags "+HOME+TODO=\"TODO\"")
-	("W" todo "WAITING")
-	("s" todo "SOMEDAY")
-	("f" occur-tree "\\<FIXME\\>")))
+(use-package prettier
+  :ensure t
+  :config
+  (add-hook 'after-init-hook #'global-prettier-mode))
 
-(add-hook 'org-agenda-mode-hook
-	  (lambda ()
-	    (visual-line-mode -1)
-	    (toggle-truncate-lines 1)))
-(setq org-modules '(org-habit))
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
 
-;------------------------------------
-;;;; Global Functions
-;------------------------------------
+(use-package lsp-sourcekit
+  :after lsp-mode
+  :config
+  (setq lsp-sourcekit-executable "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"))
 
-(defun word-count ()
-  "Counts the number of words in buffer." 
+(use-package swift-mode
+  :hook (swift-mode . (lambda () (lsp)))
+  :config (add-hook 'after-save-hook 'swift-format-current-file))
+
+(defun swift-format-current-file ()
+  "Format the file associated with the current buffer with Swift-Format"
   (interactive)
-  (shell-command-on-region (point-min) (point-max) "wc -w"))
+  (let ((file-name (buffer-file-name)))
+    (when file-name
+      (save-excursion
+        (shell-command (format "swift-format --in-place %s" file-name) nil t))
+      (revert-buffer nil t))))
 
-(defun nsavage-insert-date ()
-    "Insert the current date. With prefix-argument, use ISO format. With
-   two prefix arguments, write out the day and month name."
-    (interactive)
-    (insert (format-time-string "%Y-%m-%d")))
-
-;---------------------------------
-;;;; Key Bindings
-;---------------------------------
-
-(global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key [f8] 'deft)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c /") 'org-sparse-tree)
-(global-set-key (kbd "C-RET") 'org-insert-heading)
-(global-set-key (kbd "C-c c") 'org-capture)
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c r") 'helm-org-rifle)
-(global-set-key (kbd "C-c p") 'org-do-demote)
-(global-set-key (kbd "C-c P") 'org-do-promote)
-(global-set-key (kbd "C-w") 'backward-kill-word)
+(defun xcode-build()
+  (interactive)
+  (shell-command-to-string
+    "osascript -e 'tell application \"Xcode\"' -e 'set targetProject to active workspace document' -e 'build targetProject' -e 'end tell'"))
+(defun xcode-run()
+  (interactive)
+  (shell-command-to-string
+    "osascript -e 'tell application \"Xcode\"' -e 'set targetProject to active workspace document' -e 'stop targetProject' -e 'run targetProject' -e 'end tell'"))
+(defun xcode-build-run()
+  (interactive)
+  (xcode-build)
+  (xcode-run))
+(defun xcode-test()
+  (interactive)
+  (shell-command-to-string
+    "osascript -e 'tell application \"Xcode\"' -e 'set targetProject to active workspace document' -e 'stop targetProject' -e 'test targetProject' -e 'end tell'"))
+(defun nsavage-load-new-vterm ()
+  (interactive)
+  (let ((current-prefix-arg t))
+    (call-interactively #'vterm)))
+(global-set-key (kbd "C-c t") 'nsavage-load-new-vterm)
+(global-set-key (kbd "C-s") 'swiper-isearch)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-window-frame-fractions (quote (0.5 . 1)))
+ '(custom-enabled-themes '(catppuccin))
+ '(custom-safe-themes
+   '("1930427eae3d4d830a43fd79fbda76021138b929c243a4e8606cf4f0531ea17c" "57a29645c35ae5ce1660d5987d3da5869b048477a7801ce7ab57bfb25ce12d3e" "4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3" "674aef6026ad23fb118cbfc773c0ef939ed340543abae08957db71d4b96ad202" default))
+ '(exec-path
+   '("/opt/homebrew/bin" "/opt/homebrew/sbin" "/usr/local/bin" "/System/Cryptexes/App/usr/bin" "/usr/bin" "/bin" "/usr/sbin" "/sbin" "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin" "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin" "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin" "/Library/Apple/usr/bin" "/usr/local/go/bin" "/Applications/Emacs.app/Contents/MacOS/bin-arm64-11" "/Applications/Emacs.app/Contents/MacOS/libexec-arm64-11" "/Applications/Emacs.app/Contents/MacOS/libexec" "/Users/nick/.nvm/versions/node/v20.16.0/bin"))
+ '(ns-alternate-modifier 'super)
+ '(ns-command-modifier 'meta)
  '(package-selected-packages
-   (quote
-    (deft anki-editor org-books org-caldav nov php-mode ess magit lua-mode hledger-mode helm-org-rifle evil-ledger 2048-game))))
+   '(lsp-sourcekit swift-mode swift-ts-mode treesit-auto lsp-mode exec-path-from-shell prettier prettier-js-args prettier-js swiper dired-sidebar projectile company solo-jazz-theme solarized-theme vterm ivy catppuccin-theme magit evil-visual-mark-mode go-mode))
+ '(prettier-js-command "/Users/nick/.nvm/versions/node/v20.16.0/bin/prettier"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
